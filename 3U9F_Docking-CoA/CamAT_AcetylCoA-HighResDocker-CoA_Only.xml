@@ -1,0 +1,37 @@
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+        <fa_talaris2014 weights=talaris2014/>
+    </SCOREFXNS>
+    <FILTERS>
+    </FILTERS>
+    <LIGAND_AREAS>
+        <AcetylCoA chain="X" cutoff=6 add_nbr_radius="true" all_atom_mode="false" minimize_ligand=0 Calpha_restraints=1 high_res_degrees=15 tether_ligand=1/>
+    </LIGAND_AREAS>
+    <INTERFACE_BUILDERS>
+        <Interface ligand_areas="AcetylCoA" extension_window=2/>
+    </INTERFACE_BUILDERS>
+    <MOVEMAP_BUILDERS>
+        <Movemap sc_interface="Interface" bb_interface="Interface" minimize_water="false"/>
+    </MOVEMAP_BUILDERS>
+    <MOVERS>
+        <StartFrom name=start_from_COA chain="X">
+            <Coordinates x=-25.145 y=-34.827 z=2.132/>
+        </StartFrom>
+        <Translate name=translate_COA chain="X" distribution="uniform" angstroms=.1 cycles=50/>
+        <Rotate name=rotate_COA chain="X" distribution="uniform" degrees=12 cycles=1000/>
+        <SlideTogether name=slide_COA chains="X"/>
+        <HighResDocker name=Dock repack_every_Nth=5 scorefxn="fa_talaris2014" movemap_builder="Movemap" cycles=6/>
+        <FinalMinimizer name=min_COA scorefxn=fa_talaris2014 movemap_builder="Movemap">
+        </FinalMinimizer>
+    </MOVERS>
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+    <PROTOCOLS>
+        <Add mover_name="start_from_COA"/>
+        <Add mover_name="translate_COA"/>
+        <Add mover_name="rotate_COA"/>
+        <Add mover_name="slide_COA"/>
+        <Add mover_name="Dock"/>
+        <Add mover_name="min_COA"/>
+    </PROTOCOLS>
+</ROSETTASCRIPTS>
