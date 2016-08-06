@@ -1,0 +1,52 @@
+<ROSETTASCRIPTS>
+    <SCOREFXNS>
+        <fa_talaris2014 weights=talaris2014>
+            <Reweight scoretype="atom_pair_constraint" weight=1.0/>
+            <Reweight scoretype="angle_constraint" weight=1.0/>
+            <Reweight scoretype="dihedral_constraint" weight=1.0/>
+        </fa_talaris2014>
+    </SCOREFXNS>
+    <FILTERS>
+    </FILTERS>
+    <LIGAND_AREAS>
+        <AcetylCoA chain="X" cutoff=6 add_nbr_radius="true" all_atom_mode="false" minimize_ligand=0 Calpha_restraints=1 high_res_degrees=15/>
+        <CAM chain="Y" cutoff=6 add_nbr_radius="true" all_atom_mode="false" minimize_ligand=0 Calpha_restraints=1 high_res_degrees=5 tether_ligand=1/>
+    </LIGAND_AREAS>
+    <INTERFACE_BUILDERS>
+        <Interface ligand_areas="CAM,AcetylCoA" extension_window=2/>
+    </INTERFACE_BUILDERS>
+    <MOVEMAP_BUILDERS>
+        <Movemap sc_interface="Interface" bb_interface="Interface" minimize_water="false"/>
+    </MOVEMAP_BUILDERS>
+    <MOVERS>
+        <StartFrom name=start_from_COA chain="X">
+            <Coordinates x=-25.145 y=-34.827 z=2.132/>
+        </StartFrom>
+        <Translate name=translate_COA chain="X" distribution="uniform" angstroms=.1 cycles=100/>
+        <Rotate name=rotate_COA chain="X" distribution="uniform" degrees=12 cycles=2000/>
+        <StartFrom name=start_from_CAM chain="Y">
+            <Coordinates x=-14.853 y=-28.439 z=0.390/>
+        </StartFrom>
+        <Translate name=translate_CAM chain="Y" distribution="uniform" angstroms=.1 cycles=50/>
+        <Rotate name=rotate_CAM chain="Y" distribution="uniform" degrees=5 cycles=1000/>
+        <SlideTogether name=slide chains="X, Y"/>
+        <HighResDocker name=Dock repack_every_Nth=5 scorefxn="fa_talaris2014" movemap_builder="Movemap" cycles=6/>
+        <FinalMinimizer name=min scorefxn=fa_talaris2014 movemap_builder="Movemap">
+        </FinalMinimizer>
+        <ConstraintSetMover name=cst add_constraints="true" cst_file="../CAM_COA_constraints.cst"/>
+    </MOVERS>
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+    <PROTOCOLS>
+        <Add mover_name="cst"/>
+        <Add mover_name="start_from_COA"/>
+        <Add mover_name="translate_COA"/>
+        <Add mover_name="rotate_COA"/>
+        <Add mover_name="start_from_CAM"/>
+        <Add mover_name="translate_CAM"/>
+        <Add mover_name="rotate_CAM"/>
+        <Add mover_name="slide"/>
+        <Add mover_name="Dock"/>
+        <Add mover_name="min"/>
+    </PROTOCOLS>
+</ROSETTASCRIPTS>
