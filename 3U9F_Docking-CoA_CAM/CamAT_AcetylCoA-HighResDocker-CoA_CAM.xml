@@ -10,7 +10,7 @@
     </FILTERS>
     <LIGAND_AREAS>
         <AcetylCoA chain="X" cutoff=6 add_nbr_radius="true" all_atom_mode="false" minimize_ligand=0 Calpha_restraints=1 high_res_degrees=15/>
-        <CAM chain="Y" cutoff=6 add_nbr_radius="true" all_atom_mode="false" minimize_ligand=0 Calpha_restraints=1 high_res_degrees=5 tether_ligand=1/>
+        <CAM chain="Y" cutoff=6 add_nbr_radius="true" all_atom_mode="false" minimize_ligand=0 Calpha_restraints=1 high_res_degrees=5/>
     </LIGAND_AREAS>
     <INTERFACE_BUILDERS>
         <Interface ligand_areas="CAM,AcetylCoA" extension_window=2/>
