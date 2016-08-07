@@ -23,12 +23,12 @@
             <Coordinates x=-25.145 y=-34.827 z=2.132/>
         </StartFrom>
         <Translate name=translate_COA chain="X" distribution="uniform" angstroms=.1 cycles=100/>
-        <Rotate name=rotate_COA chain="X" distribution="uniform" degrees=12 cycles=2000/>
+        <Rotate name=rotate_COA chain="X" distribution="uniform" degrees=12 cycles=1000/>
         <StartFrom name=start_from_CAM chain="Y">
             <Coordinates x=-14.853 y=-28.439 z=0.390/>
         </StartFrom>
         <Translate name=translate_CAM chain="Y" distribution="uniform" angstroms=.1 cycles=50/>
-        <Rotate name=rotate_CAM chain="Y" distribution="uniform" degrees=5 cycles=1000/>
+        <Rotate name=rotate_CAM chain="Y" distribution="uniform" degrees=30 cycles=1000/>
         <SlideTogether name=slide chains="X, Y"/>
         <HighResDocker name=Dock repack_every_Nth=5 scorefxn="fa_talaris2014" movemap_builder="Movemap" cycles=6/>
         <FinalMinimizer name=min scorefxn=fa_talaris2014 movemap_builder="Movemap">
