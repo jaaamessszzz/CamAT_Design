@@ -42,11 +42,15 @@
         <Add mover_name="start_from_COA"/>
         <Add mover_name="translate_COA"/>
         <Add mover_name="rotate_COA"/>
+        <Add mover_name="cst"/>
         <Add mover_name="start_from_CAM"/>
         <Add mover_name="translate_CAM"/>
         <Add mover_name="rotate_CAM"/>
+        <Add mover_name="cst"/>
         <Add mover_name="slide"/>
+        <Add mover_name="cst"/>
         <Add mover_name="Dock"/>
+        <Add mover_name="cst"/>
         <Add mover_name="min"/>
     </PROTOCOLS>
 </ROSETTASCRIPTS>
